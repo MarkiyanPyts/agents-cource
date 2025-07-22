@@ -137,6 +137,6 @@ if __name__ == "__main__":
         type="messages", 
         chatbot=gr.Chatbot(show_label=False),
         theme=gr.themes.Soft(),
-        css="main { padding: 5px !important; } input, textarea { font-size: 16px !important; } .input-container { display: flex !important; gap: 10px !important; }"
+        css="main { padding: 5px !important; } input, textarea { font-size: 16px !important; } .input-container { display: flex !important; gap: 10px !important; } footer { display: none !important; }"
     ).launch(show_api=False)
     
