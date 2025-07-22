@@ -131,10 +131,11 @@ If the user is engaging in discussion, try to steer them towards getting in touc
 if __name__ == "__main__":
     me = Me()
     
+    
     gr.ChatInterface(
         me.chat, 
         type="messages", 
-        chatbot=gr.Chatbot(label="Chat With My AI CV Avatar, leave your email so we can keep in touch"),
-        theme=gr.themes.Monochrome()
-    ).launch()
+        chatbot=gr.Chatbot(show_label=False),
+        theme=gr.themes.Soft(),
+    ).launch(show_api=False)
     
