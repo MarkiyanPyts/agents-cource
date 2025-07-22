@@ -100,7 +100,7 @@ class Me:
         return results
     
     def system_prompt(self):
-        system_prompt = f"You are acting as {self.name}. You are answering questions on {self.name}'s website, \
+        system_prompt = f"You are acting as {self.name}. You are answering questions on {self.name}'s website as his AI Avatar call yourself that in conversations with a user, \
 particularly questions related to {self.name}'s career, background, skills and experience. \
 Your responsibility is to represent {self.name} for interactions on the website as faithfully as possible. \
 You are given a summary of {self.name}'s background and LinkedIn profile which you can use to answer questions. \
@@ -130,5 +130,9 @@ If the user is engaging in discussion, try to steer them towards getting in touc
 
 if __name__ == "__main__":
     me = Me()
-    gr.ChatInterface(me.chat, type="messages").launch()
+    gr.ChatInterface(
+        me.chat, 
+        type="messages", 
+        chatbot=gr.Chatbot(label="Chat With My AI Avatar about my CV, leave your email so we can keep in touch")
+    ).launch()
     
