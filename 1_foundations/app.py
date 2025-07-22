@@ -137,5 +137,6 @@ if __name__ == "__main__":
         type="messages", 
         chatbot=gr.Chatbot(show_label=False),
         theme=gr.themes.Soft(),
+        css="main { padding: 5px !important; }"
     ).launch(show_api=False)
     
