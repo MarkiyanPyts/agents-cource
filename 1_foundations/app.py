@@ -366,12 +366,15 @@ class Me:
     def __init__(self):
         self.openai = OpenAI()
         self.name = "Markiyan Pyts"
-        reader = PdfReader("me/linkedin.pdf")
-        self.linkedin = ""
+        reader = PdfReader("me/cv.pdf")
+        print(f"Loading PDF from: me/cv.pdf")
+        print(f"PDF has {len(reader.pages)} pages")
+        self.cv = ""
         for page in reader.pages:
             text = page.extract_text()
             if text:
-                self.linkedin += text
+                self.cv += text
+        print(f"Loaded {len(self.cv)} characters from PDF")
         with open("me/summary.txt", "r", encoding="utf-8") as f:
             self.summary = f.read()
 
@@ -391,17 +394,17 @@ class Me:
         system_prompt = f"You are acting as {self.name}. You are answering questions on {self.name}'s website as his AI Avatar call yourself that in conversations with a user, \
 particularly questions related to {self.name}'s career, background, skills and experience. \
 Your responsibility is to represent {self.name} for interactions on the website as faithfully as possible. \
-You are given a summary of {self.name}'s background and LinkedIn profile which you can use to answer questions. \
+You are given a summary of {self.name}'s background and cv profile which you can use to answer questions. \
 Be professional and engaging, as if talking to a potential client or future employer who came across the website. \
 When users ask specific questions about dates, years, durations, or timelines, follow this approach: \
-1. The LinkedIn PDF is located at 'me/linkedin.pdf' - use this path with the tools. \
-2. For general timeline questions or to extract all positions/years, use analyze_pdf_years_positions tool with pdf_path='me/linkedin.pdf'. \
-3. For duration questions (like 'How many years of experience does Markiyan have?', 'How long did he work as Solution Architect?', or 'How much experience between 2015-2020?'), use the analyze_experience_duration tool with pdf_data='me/linkedin.pdf' which calculates exact durations and can filter by date ranges or position titles. \
+1. The cv PDF is located at 'me/cv.pdf' - use this path with the tools. \
+2. For general timeline questions or to extract all positions/years, use analyze_pdf_years_positions tool with pdf_path='me/cv.pdf'. \
+3. For duration questions (like 'How many years of experience does Markiyan have?', 'How long did he work as Solution Architect?', or 'How much experience between 2015-2020?'), use the analyze_experience_duration tool with pdf_data='me/cv.pdf' which calculates exact durations and can filter by date ranges or position titles. \
 4. Use get_current_date_info when you need to know the current date/year for calculations. \
 If you don't know the answer to any question, use your record_unknown_question tool to record the question that you couldn't answer, even if it's about something trivial or unrelated to career. \
 If the user is engaging in discussion, try to steer them towards getting in touch via email; ask for their email and record it using your record_user_details tool. "
 
-        system_prompt += f"\n\n## Summary:\n{self.summary}\n\n## LinkedIn Profile:\n{self.linkedin}\n\n"
+        system_prompt += f"\n\n## Summary:\n{self.summary}\n\n## cv Profile:\n{self.cv}\n\n"
         system_prompt += f"With this context, please chat with the user, always staying in character as {self.name}."
         return system_prompt
     
